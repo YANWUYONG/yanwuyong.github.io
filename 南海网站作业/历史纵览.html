@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>历史纵览</title>
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/all.css" />
+    <style>
+      body .shell-main-nav ul .nav-box {
+        left: 360px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: rgb(248, 248, 248);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      body .shell-main-nav {
+        margin-bottom: 0;
+      }
+      /* 大内容盒子里嵌套的会蹦出来的小盒子 */
+      .main {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 1430px;
+        overflow-x: hidden;
+        transform: translateY(0px);
+        background-color: #fff;
+        transition: 0.3s;
+        padding: 50px;
+        border: 1px solid #000;
+      }
+      /* 头图 */
+      .img {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background-image: url("./image/中国南海.jpg");
+        background-attachment: fixed;
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      /* 就管图片之后，中国南海文字+白色边框 */
+      .img::after {
+        content: "中国南海";
+        width: 500px;
+        height: 200px;
+        border-radius: 3px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: #fff 10px solid;
+        color: #fff;
+        letter-spacing: 30px;
+        font: 100 70px "font";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* -------------------------------------- */
+
+      .section-top {
+        width: 100%;
+        height: 300px;
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 50px;
+      }
+
+      .section-top-middle {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background-image: url("./image/概况图.webp");
+        background-size: 200%;
+        background-position-y: 20%;
+        background-position-x: 90%;
+        margin: 0 50px;
+        border: 15px solid rgba(31, 29, 29, 0.151);
+      }
+
+      .section-top-left,
+      .section-top-right {
+        width: 300px;
+        height: 300px;
+        font-size: 22px;
+        margin-top: 30px;
+      }
+
+      .section-top-left {
+        text-align: right;
+      }
+
+      .section-top p {
+        font-size: 26px;
+        color: #22a39f;
+        margin: 5px 0;
+      }
+
+      .section-middle,
+      .section-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .section-bottom {
+        position: relative;
+      }
+
+      .section-middle-box {
+        width: 100%;
+        display: flex;
+        margin: 50px 0;
+      }
+
+      .section-middle-left {
+        width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .section-middle-left span {
+        text-align: left;
+        color: rgb(96, 156, 166);
+        margin-top: 10px;
+      }
+
+      .section-middle-right {
+        width: 600px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .section-middle-right img {
+        width: 400px;
+      }
+
+      .section-middle-left span {
+        text-align: center;
+        font-size: 20px;
+      }
+
+      .Skills {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin: 40px 0;
+      }
+
+      .Skills li {
+        width: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 20px 0;
+        height: 50px;
+        cursor: pointer;
+      }
+
+      .Skills li span,
+      .Skills li p {
+        text-align: center;
+        font-size: 20px;
+        display: block;
+        width: 50%;
+        transition: 0.2s;
+        letter-spacing: 0px;
+      }
+
+      .Skills li p {
+        color: #22a39f;
+      }
+
+      .Skills li:hover p {
+        letter-spacing: 5px;
+      }
+
+      .Achievement {
+        margin-top: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .Achievement-left {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+      }
+
+      .Achievement-left h2 {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .Achievement-left span {
+        font-size: 10px;
+      }
+
+      .Achievement-right {
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        width: 450px;
+      }
+
+      .Achievement-right img {
+        width: 200px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        transition: 0.3s;
+      }
+
+      .Achievement-right img:hover {
+        transform: scale(1.1);
+      }
+
+      article {
+        display: flex;
+        justify-content: center;
+      }
+
+      aside {
+        width: 100%;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgb(240, 240, 224);
+        padding: 50px 0;
+      }
+      .bottom {
+        width: 1300px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+      }
+      .gaikuang {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        top: 10px;
+        position: relative;
+        text-align: left;
+        padding-left: 150px;
+        padding-right: 150px;
+        margin-bottom: 40px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="shell">
+      <div class="shell-main">
+        <div class="shell-main-nav">
+          <div class="logo">
+            <img src="./image/头像.jpg" alt="" />
+            <span>小皮の作业</span>
+          </div>
+          <ul>
+            <li><a href="./历史纵览.html">历史纵览</a></li>
+            <li><a href="./当时今日.html">当时今日</a></li>
+            <li><a href="./相关解说.html">相关解说</a></li>
+            <li><a href="https://www.thesouthchinasea.org.cn/cn/index.html">权威频道</a></li>
+            <div class="nav-box"></div>
+          </ul>
+        </div>
+        <div class="img"></div>
+        <div class="main">
+          <section>
+            <div class="section-top">
+              <div class="section-top-left"></div>
+              <div class="section-top-middle"></div>
+              <div class="section-top-right"></div>
+            </div>
+            <div class="section-middle">
+              <h2 style="font-size: 30px; margin-top: 50px">南海概况</h2>
+              <span>“Overview of the South China Sea ”</span>
+
+              <div class="gaikuang">
+                <span
+                  >位于中国大陆的南方，是太平洋西部海域，中国三大边缘海之一，</span
+                >
+                <span
+                  >该海域自然海域面积约350万平方公里，为中国近海中面积最大、水最深的海区，</span
+                >
+                <span>平均水深1212米，最大深度5559米。</span>
+                <span style="margin-top: 20px"
+                  >中国领海由渤海(内海)和黄海、东海、南海三大边海组成。</span
+                >
+                <span>其中南海南北纵跨约2000公里，东西横越约1000公里,</span>
+                <span
+                  >北起广东省南澳岛与台湾岛南端鹅銮鼻一线，南至加里曼丹岛、苏门答腊岛,</span
+                >
+                <span>西依中国大陆、中南半岛、马来半岛，东抵菲律宾,</span>
+                <span>通过海峡或水道东与太平洋相连，西与印度洋相通,</span>
+                <span>是一个东北-西南走向的半封闭海。</span>
+              </div>
+
+              <div class="section-middle-box">
+                <div class="section-middle-left">
+                  <img
+                    src="./image/九段线.jpg"
+                    alt=""
+                    style="
+                      width: 250px;
+                      height: 250px;
+                      display: flex;
+                      justify-content: center;
+                      margin-left: 180px;
+                      align-items: center;
+                      border: 10px solid rgba(53, 116, 253, 0.63);
+                      border-radius: 10px;
+                    "
+                  />
+                  <span>九段线</span>
+                </div>
+                <div class="section-middle-right">
+                  <span style="padding-top: 100px"
+                    >南海诸岛归属范围线，是中国对南海海域权益边界的一种画法。在中华人民共和国版图中，南中国海里有9条断续线组成的U形线，通常称为九段线，线内区域为中国南海。因此，九段线区分了南中国海(面积350万平方公里)与中国南海(面积210万平方公里)。</span
+                  >
+                </div>
+              </div>
+
+              <div class="section-middle-box">
+                <div class="section-middle-left">
+                  <img
+                    src="./image/南中国海.webp"
+                    alt=""
+                    style="
+                      width: 250px;
+                      height: 250px;
+                      display: flex;
+                      justify-content: center;
+                      margin-left: 180px;
+                      align-items: center;
+                      border: 10px solid rgba(53, 116, 253, 0.63);
+                      border-radius: 10px;
+                    "
+                  />
+                  <span>南中国海</span>
+                </div>
+                <div class="section-middle-right">
+                  <span style="padding-top: 100px"
+                    >是地理上的水域，我国大陆南部，太平洋西部，连接这太平洋与印度洋的交通要道，面积350万平方公里，为世界第三大海，大部分属于热带。南海海域中有超过200个无人居住的岛屿和岩礁。主要群岛有纳土纳群岛、阿南巴斯群岛、南沙群岛、中沙群岛、东沙群岛、西沙群岛等
+                  </span>
+                </div>
+              </div>
+
+              <div
+                class="section-middle-box"
+                style="border-bottom: solid 1px #000; padding-bottom: 20px"
+              >
+                <div class="section-middle-left">
+                  <img
+                    src="./image/中国南海.webp"
+                    alt=""
+                    style="
+                      width: 250px;
+                      height: 250px;
+                      display: flex;
+                      justify-content: center;
+                      margin-left: 180px;
+                      align-items: center;
+                      border: 10px solid rgba(53, 116, 253, 0.63);
+                      border-radius: 10px;
+                    "
+                  />
+                  <span>中国南海</span>
+                </div>
+                <div class="section-middle-right">
+                  <span style="padding-top: 100px"
+                    >U型九段线内的海域都属中国的南海，中国南海属于南中国海的一部分，面积约为210万平方公里，占南中国海面积的60%，其中包括有南沙群岛、中沙群岛、东沙群岛、西沙群岛。南海有丰富的油气矿产资源、滨海和海岛旅游资源、海洋能资源、港口航运资源、热带亚热带生物资源，是中国最重要的海岛和珊瑚礁、红树林、海草床等热带生态系统分布区。
+                  </span>
+                </div>
+              </div>
+
+              <h2 style="font-size: 30px; margin: 30px 0">历史概况</h2>
+              <span>“Profiles in History”</span>
+              <div class="section-middle-box"></div>
+
+              <div class="section-middle-box">
+                <div class="section-middle-left">
+                  <span style="color: #1c383b">东汉</span>
+                  <span style="color: #22a39f"
+                    >涨海崎头，水浅而多磁石。——《异物志》</span
+                  >
+                  <span style="color: #22a39f"
+                    >涨海：古代对南海的称谓。崎头：古代对海中岛礁的称呼。</span
+                  >
+                  <span style="color: #1c383b">三国</span>
+                  <span style="color: #22a39f"
+                    >句稚，去与游八百里…崎头，出涨海，中浅而多磁石。——《南州异物志》</span
+                  >
+                  <span style="color: #22a39f">磁石：暗沙、暗礁。</span>
+                  <span style="color: #1c383b">唐朝</span>
+                  <span style="color: #22a39f"
+                    >五岭之南，涨海之北…自汉以后，历代开拓。——《通典》</span
+                  >
+                  <span style="color: #22a39f"
+                    >中国先民开发南海的记载开始频见于典籍之中。</span
+                  >
+                </div>
+                <div class="section-middle-right">
+                  <img src="./image/渔船.jpg" alt="" />
+                </div>
+              </div>
+
+              <div class="section-middle-box">
+                <div class="section-middle-right">
+                  <img src="./image/岛礁.jpg" alt="" />
+                </div>
+                <div class="section-middle-left">
+                  <span style="color: #1c383b">北宋</span>
+                  <span style="color: #22a39f"
+                    >广州南海郡…，七日至九乳螺洲，又三日至不劳山。——《武经总要》</span
+                  >
+                  <span style="color: #22a39f">九乳螺州：今西沙群岛。</span>
+                  <span style="color: #1c383b">南宋</span>
+                  <span style="color: #22a39f"
+                    >海南四郡之西南洋…，传闻东大洋海，有长砂石塘数万里。——《岭外代答》</span
+                  >
+                  <span style="color: #22a39f"
+                    >“长砂”(长沙)“石塘”统称南海诸岛</span
+                  >
+                  <span style="color: #1c383b">元朝</span>
+                  <span style="color: #22a39f"
+                    >石塘之骨，由潮州而生。迤逦如长蛇，横亘海中，越海诸国。——《岛夷志略》
+                  </span>
+                  <span style="color: #22a39f"
+                    >以石塘概称的南海诸岛的地形地貌进行了描述。</span
+                  >
+                </div>
+              </div>
+
+              <div class="section-middle-box">
+                <div class="section-middle-left">
+                  <span style="color: #1c383b">明朝</span>
+                  <span style="color: #22a39f"
+                    >千里石塘在崖州海面之七百里外，…万里长堤出其南，波流甚急。——《海槎馀录》</span
+                  >
+                  <span style="color: #22a39f"
+                    >千里石塘指西沙群岛，万里长堤指南沙群岛。</span
+                  >
+                  <span style="color: #1c383b">清朝</span>
+                  <span style="color: #22a39f"
+                    >自琼崖，历铜鼓，经七州洋、四更沙，周遭三千里，躬自巡视，地方宁谧。升定海总兵官。“——《泉州府志》</span
+                  >
+                  <span style="color: #22a39f"
+                    >广东副将吴陛从今海口出发巡视南海。</span
+                  >
+                </div>
+                <div class="section-middle-right">
+                  <img src="./image/巡视.jpg" alt="" />
+                </div>
+                
+              </div>
+ 
+              </div>
+              <h2 style="font-size: 30px; margin: 30px 0"></h2>
+
+              <div
+                class="section-middle-box"
+                style="border-bottom: solid 1px #000; padding-bottom: 40px"
+              >
+                <div class="section-middle-left" style="width: 100%">
+                 <div class="section-middle-box">
+                <div class="section-middle-right">
+                  <img src="./image/群岛.jpg" alt="" />
+                </div>
+                <div class="section-middle-left">
+                  <span style="color: #1c383b">1929年</span>
+                  <span style="color: #22a39f"
+                    >广东陆军测量局测绘《西沙群岛图》</span
+                  >
+                  <span style="color: #1c383b">1939年</span>
+                  <span style="color: #22a39f"
+                    >美国出版的《中国地图》:完全认可南海诸岛归属中国，南石(黄岩岛)属于中国。</span
+                  >
+                  <span style="color: #1c383b">1942年</span>
+                  <span style="color: #22a39f"
+                    >意大利编制的东亚地图(AISA ORIENTALE)图示显示中国南海，西沙群岛用点线围圈，红色字体标记“ChungKwo”
+                  </span>
+            <span style="color: #1c383b">1947年</span>
+                  <span style="color: #22a39f"
+                    >美国出版《古德世界地图集》中东沙群岛标注“China”,西沙群岛标HSISHA CHUNTAO也括注“China”。
+                  </span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <article>
+            <div class="section-bottom" style="margin-bottom: 80px;">
+              <h2 style="margin-top: 60px; color: #22a39f">"南海危机"--岌岌可危的和平</h2>
+               <video src="./image/熊出没.mp4" controls="controls" width="700px" height="480px"></video>
+            </div>
+          </article>
+
+          <aside>
+            <h2 style="font-size: 30px; margin-top: 30px">南海争端--剑拔弩张</h2>
+            <h2 style="font-size: 30px; margin-top: 30px">（长文本）</h2>
+            <br />
+            <span>“South China Sea disputes”</span>
+<h1 style="font-size: 20px; margin-top: 30px">争端本质</h1>
+              <br />
+              南海问题实质是中国与越南、菲律宾、马来西亚、文莱等国围绕南沙岛礁主权及海洋管辖权的地区性的海洋争端。 <br />
+              <br />
+              历史上，中国最早发现、命名、开发南海诸岛，长期、和平、有效地对南海诸岛及相关海域实
+              施行政管辖，建立<br/>了对南海诸岛的主权和相关海洋权益。 <br/>
+              <br />
+              二战期间，日本一度非法侵占我国南海诸岛，并将南海诸岛更名为“新南群岛”，划归台湾总督府高雄州高雄市<br />管辖。1945年二战结束之后，根据1943年《开罗宣言》和1945年《波茨坦公告》的有关规定，中国政府于194<br />6年恢复对南海诸岛行使主权。<br />
+               <br />
+              直至20世纪70年代初，南海周边国家并没有对中国拥有南沙群岛的主权提出异议，南海局势是平静的，没有所谓<br />的“南海问题”。此后，一些南海周边国家开始对中国南沙群岛的岛礁提出领土要求，甚至非法侵占部分岛礁<br />，由此导致南沙群岛领土争议。这些国家还依据《公约》，提出了专属经济区和大陆架主张，这些海域主张覆<br />盖的范围相互重叠，从而形成了南海部分海域的划界问题。 <br />
+
+              <br />
+              南海问题产生的主要原因大致是： <br />
+              <br />
+             第一，20世纪60年代末，在南海地区发现了丰富的石油和天然气资源。1968年，联合国亚洲暨远东经济委员会亚<br />洲外岛海域矿产资源联合探勘协调委员会发布的勘察报告指出，越南沿岸邻近海域、南沙群岛东部和南部海域蕴藏<br />着丰富的石油和天然气资源。1969年，美国海洋调查船“亨特号”在南海进行地质调查，并宣称探明南海大陆架<br />上蕴藏着丰富的油气资源。1973年，世界范围内的第一次石油危机加深了人们将石油看作一种战略资源的认识。<br />南海的资源前景极大地刺激了越南、菲律宾等国。越、菲等南海周边国家开始加大蚕食中国在南沙群岛及相关海域<br />权益的实际动作，并陆续提出领土和海洋权益主张。 <br />
+ <br />
+              此外，南海的地缘政治地位、殖民主义和大国争霸等因素也与南海问题的产生密不可分。加之二战后，中国政府虽然 <br />于1946年接收了南海诸岛，但是除中国台湾驻守的太平岛外，其他岛礁长期没有派兵驻守，有效控制不足，从而给一 <br />些国家对中国南沙岛礁的觊觎之心和非法侵占的行为留下了空间。<br />
+               <br />
+              <br />
+              第二，《公约》的诞生及其创设的新制度，导致海域划界争议加剧。其中专属经济区制度与南海问题的产生有直接关联。<br />按照《公约》第121条的有关规定，岛屿如果可以维持人类居住，或可以维持自身经济生活，就可以主张200海里<br />专属经济区，赋予了基于岛屿主张海域的权利，岛屿在主张海域和未来海域划界中的地位和作用显著提升。<br />
+
+<h1 style="font-size: 20px; margin-top: 30px">局势升温</h1>
+              <br />
+              自2009年以来，南海问题持续升温，其主要原因包括： <br />
+              <br />
+              第一，美国等域外大国通过政治外交、军事、舆论等手段，逐步加大对南海问题的介入力度，加剧了南海海上形势发展的<br />复杂程度。 <br/>
+              特别是随着美国“亚太再平衡”战略的推进，南海问题成为其牵制中国，维持其在亚太地区主导权的一个重要抓手。<br/>
+              <br />
+              第二，中国的崛起和发展，使其他争端国对能否保住其非法控制的南海岛礁产生焦虑。部分国家担忧随着中国的<br />日渐强大，将有可能采取某种方式来收复被非法侵占的南沙岛礁。因此，部分争端国，通过国内立法、诉诸第三方机制、<br />
+              与域外国家深化结盟或结伴、向域外大国提供军事基地等方式来“合法化”和“漂白”其非法主张和侵占<br />所得，以巩固其对南沙已控制岛礁的非法占有。
+               <br />
+               <br />
+              第三，菲律宾、越南等有关争端国为巩固和扩大南海权益主张，不断推动南海问题国际化和扩大化，加大岛礁扩建等<br />单边行动力度。<br />
+              <br />
+
+             <h1 style="font-size: 20px; margin-top: 30px">新的特点</h1>
+              <br />
+              当前的南海形势呈现出几个新的特点： <br />
+              <br />
+             第一，南海问题逐渐由领土争议和海域主张争议演变为地缘政治、资源开发和航道管控的博弈。<br />
+              <br />
+             第二，南海问题“被扩大化”，已由原来直接当事国之间的“岛争”，扩大到域内外力量之间的“海争”或“水争”。<br />日渐强大，将有可能采取某种方式来收复被非法侵占的南沙岛礁。<br />
+  <br />
+             第三，由于南海地区安全机制的缺失，以及亚太地区安全结构的演变和调整，南海周边国家对中国的“战略猜疑”<br />上升，并采取寻求域外国家的安全保护和加强自身军力建设的应对策略。<br />因此，“大国借机谋势、小国伺机谋利、大小国联合应对中国”，以“结盟”和“拉帮结派”、谋求相对军事优势为<br />特征的南海地缘政治博弈的特点日趋明显。
+               <br />
+               
+          </aside>
+        </div>
+       
+        <div class="shell-main-footer">
+          <span>文本主要参考：BV1Pu411z7wa 网站仅作为学习作业</span>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.1.min.js"></script>
+    <script>
+      window.addEventListener("scroll", function () {
+        let top = window.scrollY;
+        console.log(top);
+        if (top > 200) { 
+          $(".main").css("transform", "translateY(-300px)");
+        } else {
+          $(".main").css("transform", "translateY(0%)");
+        }
+        // if (top > 650) {
+
+        // } else {
+
+        // }
+      });
+    </script>
+  </body>
+</html>
